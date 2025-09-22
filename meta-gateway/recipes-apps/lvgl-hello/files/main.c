@@ -1,7 +1,7 @@
 #include <unistd.h>
 #include <stdlib.h>
-#include "git/lvgl/lvgl.h"
-#include "git/lvgl/demos/lv_demos.h"
+#include "lvgl/lvgl.h"
+#include "lvgl/demos/lv_demos.h"
 
 static void btn_event_cb(lv_event_t * e)
 {
@@ -17,30 +17,48 @@ static void btn_event_cb(lv_event_t * e)
     }
 }
 
-/**
- * Create a button with a label and react on click event.
- */
 void lv_example_get_started_2(void)
 {
-    lv_obj_t * btn = lv_button_create(lv_screen_active());                  /*Add a button the current screen*/
-    lv_obj_set_pos(btn, 10, 10);                                            /*Set its position*/
-    lv_obj_set_size(btn, 120, 50);                                          /*Set its size*/
-    lv_obj_add_event_cb(btn, btn_event_cb, LV_EVENT_ALL, NULL);             /*Assign a callback to the button*/
+    /* --- Button 1 --- */
+    lv_obj_t * btn1 = lv_button_create(lv_screen_active());
+    lv_obj_set_pos(btn1, 10, 10);
+    lv_obj_set_size(btn1, 120, 50);
+    lv_obj_add_event_cb(btn1, btn_event_cb, LV_EVENT_ALL, NULL);
 
-    lv_obj_t * label = lv_label_create(btn);                                /*Add a label to the button*/
-    lv_label_set_text(label, "Button");                                     /*Set the labels text*/
-    lv_obj_center(label);
+    lv_obj_t * label1 = lv_label_create(btn1);
+    lv_label_set_text(label1, "Button 1");
+    lv_obj_center(label1);
+
+    /* --- Button 2 --- */
+    lv_obj_t * btn2 = lv_button_create(lv_screen_active());
+    lv_obj_set_pos(btn2, 140, 10);
+    lv_obj_set_size(btn2, 120, 50);
+    lv_obj_add_event_cb(btn2, btn_event_cb, LV_EVENT_ALL, NULL);
+
+    lv_obj_t * label2 = lv_label_create(btn2);
+    lv_label_set_text(label2, "Button 2");
+    lv_obj_center(label2);
+
+    /* --- Button 3 --- */
+    lv_obj_t * btn3 = lv_button_create(lv_screen_active());
+    lv_obj_set_pos(btn3, 270, 10);
+    lv_obj_set_size(btn3, 120, 50);
+    lv_obj_add_event_cb(btn3, btn_event_cb, LV_EVENT_ALL, NULL);
+
+    lv_obj_t * label3 = lv_label_create(btn3);
+    lv_label_set_text(label3, "Button 3");
+    lv_obj_center(label3);
 }
 
 int main(void)
 {
     lv_init();
 
-    /* DISPLAY: framebuffer */
+
     lv_display_t *disp = lv_linux_fbdev_create();
     lv_linux_fbdev_set_file(disp, getenv("LV_LINUX_FBDEV_DEVICE") ?: "/dev/fb0");
+    lv_display_set_rotation(disp, LV_DISPLAY_ROTATION_90);
 
-    /* INPUT: evdev (dotyk/mysz) */
     lv_indev_t *indev = lv_evdev_create(LV_INDEV_TYPE_POINTER,
                         getenv("EVDEV_NAME") ?: "/dev/input/event5");
     lv_indev_set_display(indev, disp);

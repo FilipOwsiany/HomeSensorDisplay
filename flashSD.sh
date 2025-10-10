@@ -8,11 +8,11 @@
     fi
     echo "Found /dev/sda."
 
-    cd poky-rpi/build/tmp/deploy/images/raspberrypi5-gateway || exit 1
+    cd poky-rpi/build/tmp/deploy/images/raspberrypi5-display || exit 1
     echo "Flashing..."
 
     set -e
 
-    bzcat gateway-image-raspberrypi5-gateway.rootfs.wic.bz2 | sudo dd of=/dev/sda bs=4M status=progress conv=fsync
+    bzcat display-image-raspberrypi5-display.rootfs.wic.bz2 | sudo dd of=/dev/sda bs=4M status=progress conv=fsync
     echo "Done."
 )

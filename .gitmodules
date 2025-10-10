@@ -10,7 +10,7 @@
 	path = poky-rpi
 	url = https://git.yoctoproject.org/poky
 	branch = scarthgap
-[submodule "DisplayApplication/lvgl"]
-	path = DisplayApplication/lvgl
+[submodule "displayApplication/lvgl"]
+	path = displayApplication/lvgl
 	url = https://github.com/lvgl/lvgl.git
 	branch = release/v9.3

@@ -7,11 +7,19 @@ SRC_URI = " \
     file://CMakeLists.txt \
     file://lv_conf.h \
     file://main.c \
+    file://lvgl_hello.service \
 "
 
 S = "${WORKDIR}"
 
 inherit cmake pkgconfig
+inherit systemd
+
+# Unit systemd
+SYSTEMD_SERVICE:${PN} = "lvgl_hello.service"
+SYSTEMD_AUTO_ENABLE:${PN} = "enable"
+
+INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 
 LVGL_LOCAL_PATH ?= "/home/filip/git/HomeSensorDisplay/displayApplication/lvgl"
 
@@ -26,12 +34,19 @@ do_prepare_lvgl() {
     fi
 
     install -d ${S}/lvgl
-    cp -a "${LVGL_LOCAL_PATH}/." "${S}/lvgl/"
+    cp -R "${LVGL_LOCAL_PATH}/." "${S}/lvgl/"
 }
 
 do_install:append() {
     install -d ${D}${bindir}
     install -m 0755 ${B}/lvgl-hello ${D}${bindir}/lvgl-hello
+
+    install -d ${D}${systemd_system_unitdir}
+    install -m 0644 ${WORKDIR}/lvgl_hello.service \
+        ${D}${systemd_system_unitdir}/lvgl_hello.service
 }
 
-FILES:${PN} += "${bindir}/lvgl-hello"
+FILES:${PN} += " \
+    ${bindir}/lvgl-hello \
+    ${systemd_system_unitdir}/lvgl_hello.service \
+"

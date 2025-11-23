@@ -6,7 +6,6 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
 SRC_URI = "file://fb0fill.c \
            file://Makefile \
            file://fb0fill.service \
-           file://default \
 "
 
 S = "${WORKDIR}"
@@ -20,9 +19,8 @@ do_compile() {
 do_install() {
     oe_runmake install DESTDIR=${D}
 
-    # /etc/default
-    install -d ${D}${sysconfdir}/default
-    install -m 0644 ${WORKDIR}/default ${D}${sysconfdir}/default/fb0fill
+    install -d ${D}${bindir}
+    install -m 0755 ${B}/fb0fill ${D}${bindir}/fb0fill
 
     # unit systemd (właściwe miejsce!)
     install -d ${D}${systemd_system_unitdir}
@@ -30,10 +28,8 @@ do_install() {
 }
 
 FILES:${PN} += "${bindir}/fb0fill \
-                ${sysconfdir}/default/fb0fill \
                 ${systemd_system_unitdir}/fb0fill.service \
 "
 
-# Autostart (zmień na "disable" jeśli nie chcesz od razu)
 SYSTEMD_SERVICE:${PN} = "fb0fill.service"
-SYSTEMD_AUTO_ENABLE:${PN} = "enable"
+SYSTEMD_AUTO_ENABLE:${PN} = "disable"

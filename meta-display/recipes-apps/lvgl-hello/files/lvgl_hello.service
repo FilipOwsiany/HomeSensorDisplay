@@ -1,0 +1,10 @@
+[Unit]
+Description=Start my app
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/lvgl-hello
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

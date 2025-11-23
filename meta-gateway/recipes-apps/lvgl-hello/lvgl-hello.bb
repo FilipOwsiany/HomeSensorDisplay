@@ -13,7 +13,7 @@ S = "${WORKDIR}"
 
 inherit cmake pkgconfig
 
-LVGL_LOCAL_PATH ?= "/home/filowsi/git/HomeSensorDisplay/displayApplication/lvgl"
+LVGL_LOCAL_PATH ?= "/home/filip/git/HomeSensorDisplay/displayApplication/lvgl"
 
 EXTRA_OECMAKE = "-DLV_CONF_INCLUDE_SIMPLE=ON -DCMAKE_BUILD_TYPE=Release"
 

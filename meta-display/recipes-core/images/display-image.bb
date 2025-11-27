@@ -18,7 +18,8 @@ IMAGE_FEATURES += "ssh-server-dropbear"
 
 IMAGE_INSTALL += "\
     fb0fill \
-    lvgl-hello \
+    frontend \
+    backend \
     touchread \
     wifi-auto \
     hcsr501 \

@@ -4,6 +4,7 @@ After=multi-user.target
 
 [Service]
 Type=simple
+ExecStartPre=/bin/sleep 10
 ExecStart=/usr/bin/backend
 Restart=always
 RestartSec=2

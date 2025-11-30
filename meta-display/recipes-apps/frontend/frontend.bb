@@ -7,7 +7,7 @@ SRC_URI = "gitsm://github.com/FilipOwsiany/HomeSensorGUI.git;protocol=https;bran
 SRC_URI += "file://frontend.service"
 
 PV = "1.0+git${SRCPV}"
-SRCREV = "e0fd3e77e570f5c29a85958123f8d5b459fa8783"
+SRCREV = "69886fd1e07201a39c654a46c6c760d93b53c069"
 
 S = "${WORKDIR}/git/frontend"
 
@@ -18,9 +18,6 @@ FILES_SOLIBSDEV = ""
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 
 EXTRA_OECMAKE = "-DLV_CONF_INCLUDE_SIMPLE=ON -DCMAKE_BUILD_TYPE=Release"
-
-DEPENDS += "shared"
-RDEPENDS:${PN} += "shared"
 
 do_install() {
 
